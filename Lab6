@@ -1,0 +1,48 @@
+# Tull, Ben
+
+import pickle
+
+
+class Course_grades:
+    def __init__(self):
+        self.course = ""
+        self.stu_ID = []
+        self.stu_grade = []
+
+    def get_details(self):
+        self.course = input("What is the course name?: ")
+        n = int(input("How many students do you want to add?: "))
+        for x in range(0, n):
+            self.stu_ID.append(input("Enter Student ID: "))
+            self.stu_grade.append(input("Enter Student's grade: "))
+
+
+class1 = Course_grades()
+class1.get_details()
+
+class2 = Course_grades()
+class2.get_details()
+
+class3 = Course_grades()
+class3.get_details()
+
+class4 = Course_grades()
+class4.get_details()
+
+f = open("grades_info.dat", 'ab')
+pickle.dump(class1, f)
+pickle.dump(class2, f)
+pickle.dump(class3, f)
+pickle.dump(class4, f)
+f.close()
+
+f = open("grades_info.dat", 'rb')
+while 1:
+    try:
+        data = pickle.load(f)
+        print(data.course)
+        print(data.stu_ID)
+        print(data.stu_grade)
+    except EOFError:
+        break
+f.close()
